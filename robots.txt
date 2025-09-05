@@ -1,0 +1,32 @@
+# robots.txt for koperasi-php
+
+# This file tells search engine crawlers (like Googlebot) which pages
+# or directories they should not access on your site.
+
+# Important Considerations:
+# 1. This is a suggestion, not an enforcement. Malicious bots may ignore it.
+# 2. Files disallowed here can still be indexed if linked from other sites.
+# 3. Use with caution: Blocking essential files (like CSS/JS) can harm SEO.
+
+User-agent: *
+# Disallow access to sensitive areas and temporary files
+Disallow: /actions/
+Disallow: /config/
+Disallow: /models/
+Disallow: /includes/
+Disallow: /vendor/ # If you use Composer, this directory might exist
+Disallow: /login.php # Login page might be crawled, but it won't index content anyway.
+Disallow: /logout.php # No content to index.
+Disallow: /ajax_get_loan_details.php # AJAX endpoints
+Disallow: /ajax_get_saving_details.php # AJAX endpoints
+Disallow: /crud.php # account management
+
+# Allow assets required for proper rendering (CSS, JS, images).
+# If these directories are directly under your root, this isn't strictly needed
+# unless you have a blanket Disallow: /
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /assets/images/ # If you have an images folder
+
+# Specify your sitemap(s) if you have any.
+# Sitemap: http://www.example.com/sitemap.xml

@@ -1,0 +1,50 @@
+# ==============================================================================
+# Comprehensive .htaccess for koperasi-php (subfolder deployment)
+# ==============================================================================
+
+RewriteEngine On
+RewriteBase /koperasi-php/
+
+# ------------------------------------------------------------------
+# SECTION 1: CORE SECURITY
+# ------------------------------------------------------------------
+
+Options -Indexes
+
+<FilesMatch "\.(md|log|sql|env)$">
+    Require all denied
+</FilesMatch>
+
+<Files "Database.php">
+    Require all denied
+</Files>
+
+# ------------------------------------------------------------------
+# SECTION 2: SECURITY HEADERS
+# ------------------------------------------------------------------
+<IfModule mod_headers.c>
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# ------------------------------------------------------------------
+# SECTION 3: CLEAN URL REWRITES
+# ------------------------------------------------------------------
+
+# Skip if request matches existing file or directory
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Redirect root of koperasi-php to dashboard
+RewriteRule ^/?$ index.php?page=dashboard [L]
+
+# /login → login.php
+RewriteRule ^login/?$ login.php [NC,L]
+
+# /logout → logout.php
+RewriteRule ^logout/?$ logout.php [NC,L]
+
+# Clean URLs for main pages
+RewriteRule ^(dashboard|transactions|savings|loans|infaq)/?$ index.php?page=$1 [NC,L,QSA]

@@ -1,0 +1,740 @@
+/* --- General & Variables --- */
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --warning-color: #ffc107;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+  --bg-color: #f4f7f6;
+  --sidebar-bg: #ffffff;
+  --sidebar-width: 250px;
+  --header-height: 60px;
+  --border-color: #dee2e6;
+  --card-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Force consistent viewport handling --- */
+html {
+  overflow-x: hidden; /* Prevent horizontal scroll on html */
+}
+
+body {
+  font-family: -apple-system, BlinkMacMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--dark-color);
+  line-height: 1.6;
+  overflow-x: hidden; /* Prevent horizontal scroll on body */
+  min-width: 320px; /* Minimum supported width */
+}
+
+/* --- Layout --- */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--border-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.main-content {
+  flex-grow: 1;
+  margin-left: var(--sidebar-width);
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.content-body {
+  padding: 1.5rem;
+  flex-grow: 1;
+}
+
+/* --- Header --- */
+.app-header {
+  height: var(--header-height);
+  background-color: #fff;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info .logout-btn {
+  margin-left: 1rem;
+  background-color: var(--danger-color);
+  color: #fff;
+  padding: 0.3rem 0.8rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+/* --- Sidebar --- */
+.sidebar-header {
+  padding: 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+}
+.sidebar-nav ul {
+  list-style: none;
+  padding: 1rem 0;
+}
+.sidebar-nav a {
+  display: block;
+  padding: 0.8rem 1.5rem;
+  color: var(--dark-color);
+  text-decoration: none;
+  transition: background-color 0.2s;
+  border-left: 3px solid transparent;
+}
+.sidebar-nav a:hover {
+  background-color: #f1f1f1;
+}
+.sidebar-nav a.aktif {
+  background-color: #e9ecef;
+  font-weight: 600;
+  color: var(--primary-color);
+  border-left-color: var(--primary-color);
+}
+
+/* --- Content --- */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  box-shadow: var(--card-shadow);
+}
+.card-body {
+  padding: 1.5rem;
+}
+
+/* --- Tables --- */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+}
+th {
+  background-color: var(--light-color);
+  font-weight: 600;
+}
+tbody tr:hover {
+  background-color: #f8f9fa;
+}
+.text-right {
+  text-align: right;
+}
+/* FIX: Keep action buttons on one line in tables */
+td.actions-cell {
+  white-space: nowrap;
+}
+td.actions-cell form {
+  display: inline-block;
+  margin-left: 4px;
+}
+
+/* --- Forms & Buttons --- */
+.btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+}
+.btn-primary {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: #fff;
+}
+.btn-danger {
+  background-color: var(--danger-color);
+  color: #fff;
+}
+.btn-warning {
+  background-color: var(--warning-color);
+  color: #212529;
+}
+.form-group {
+  margin-bottom: 1rem;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.25rem;
+  font-family: inherit;
+  font-size: 1rem;
+}
+.form-actions {
+  margin-top: 1.5rem;
+  text-align: right;
+}
+.form-actions .btn {
+  margin-left: 0.5rem;
+}
+
+/* --- Badges --- */
+.badge {
+  padding: 0.3em 0.6em;
+  font-size: 75%;
+  font-weight: 700;
+  border-radius: 0.25rem;
+  color: #fff;
+}
+.badge-success {
+  background-color: var(--success-color);
+}
+.badge-danger {
+  background-color: var(--danger-color);
+}
+.badge-warning {
+  background-color: var(--warning-color);
+  color: #212529;
+}
+.badge-info {
+  background-color: #17a2b8;
+}
+
+/* --- Modal --- */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1050;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 2rem;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 8px;
+  position: relative;
+  animation: slide-down 0.3s ease-out;
+}
+@keyframes slide-down {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.close-btn {
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+}
+
+/* --- Login Page Styles (Moved from login.php) --- */
+.login-page {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  padding: 1rem;
+}
+.login-container {
+  background-color: #fff;
+  padding: 2rem 3rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+.login-container h1 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+.login-container p {
+  color: #777;
+  margin-bottom: 2rem;
+}
+.login-container .form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+.login-container label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-weight: 600;
+}
+.login-container input[type="text"],
+.login-container input[type="password"] {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+.login-container button {
+  width: 100%;
+  padding: 0.9rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.login-container button:hover {
+  background-color: #0056b3;
+}
+.error-message {
+  color: #d93025;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 992px) {
+  :root {
+    --sidebar-width: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  .sidebar.aktif {
+    transform: translateX(0);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  }
+  .main-content {
+    margin-left: 0;
+    /* Ensure main content never exceeds viewport width */
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  .menu-toggle {
+    display: block;
+    /* FIX: Ensure toggle button is always clickable by placing it on top of the sidebar */
+    position: relative;
+    z-index: 1001;
+  }
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .page-header h1 {
+    margin-bottom: 0;
+    font-size: 1.5rem;
+  }
+  .modal-content {
+    width: 95%;
+    margin: 10% auto;
+    padding: 1.5rem;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  /* FIX: Reduce padding for better mobile view */
+  .content-body {
+    padding: 1rem 0.5rem; /* Reduce horizontal padding more on mobile */
+  }
+  th,
+  td {
+    padding: 0.5rem;
+  }
+  /* FIX: Adjust login container padding for small screens */
+  .login-container {
+    padding: 2rem 1.5rem;
+  }
+
+  /* Card improvements for mobile */
+  .card {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .card-body {
+    padding: 1rem 0.5rem; /* Reduce card padding */
+  }
+
+  /* Table responsive container with better control */
+  .table-responsive {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+  }
+
+  /* Table styling for mobile */
+  table {
+    min-width: 600px; /* Set minimum width to ensure readability */
+    font-size: 0.85rem; /* Slightly smaller font on mobile */
+  }
+
+  th,
+  td {
+    padding: 0.4rem 0.3rem; /* Reduce padding further */
+    white-space: nowrap; /* Prevent text wrapping in cells */
+  }
+
+  /* Make specific columns more compact on mobile */
+  th:first-child,
+  td:first-child {
+    min-width: 80px; /* Date column */
+  }
+
+  .text-right {
+    min-width: 90px; /* Amount columns */
+  }
+
+  /* Action buttons - stack vertically on very small screens */
+  .actions-cell {
+    min-width: 120px;
+  }
+
+  .actions-cell form {
+    display: block;
+    margin-top: 0.25rem;
+    margin-left: 0;
+  }
+
+  .actions-cell .btn-sm {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.75rem;
+    width: 100%;
+  }
+
+  /* Badge adjustments */
+  .badge {
+    font-size: 0.65rem;
+    padding: 0.2em 0.4em;
+  }
+
+  /* Modal adjustments for mobile */
+  .modal-content.modal-lg {
+    width: 98%;
+    max-width: none;
+  }
+
+  /* Form improvements in modals */
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+
+  /* Dashboard summary grid */
+  .dashboard-summary {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .summary-card {
+    padding: 1rem;
+  }
+
+  .summary-card p {
+    font-size: 1.5rem; /* Smaller summary numbers on mobile */
+  }
+}
+
+/* --- Very small screens (phones in portrait) --- */
+@media (max-width: 480px) {
+  .content-body {
+    padding: 0.75rem 0.25rem;
+  }
+
+  .card {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+  }
+
+  table {
+    font-size: 0.8rem;
+  }
+
+  th,
+  td {
+    padding: 0.3rem 0.2rem;
+  }
+
+  /* Even more compact action buttons */
+  .actions-cell {
+    min-width: 100px;
+  }
+
+  .btn-sm {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.3rem;
+  }
+
+  /* Login page adjustments */
+  .login-container {
+    padding: 1.5rem 1rem;
+    margin: 0 0.5rem;
+  }
+
+  .login-container h1 {
+    font-size: 1.3rem;
+  }
+}
+
+/* --- Landscape orientation on mobile --- */
+@media (max-width: 768px) and (orientation: landscape) {
+  .modal-content {
+    max-height: 85vh;
+    margin: 2% auto;
+  }
+
+  .app-header {
+    height: 50px; /* Smaller header in landscape */
+  }
+
+  .content-body {
+    padding-top: 1rem;
+  }
+}
+
+/* --- Additional Dashboard Styles --- */
+.dashboard-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+.summary-card {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+  border-left: 5px solid var(--primary-color);
+}
+.summary-card:nth-child(2) {
+  border-color: var(--success-color);
+}
+.summary-card:nth-child(3) {
+  border-color: var(--warning-color);
+}
+.summary-card:nth-child(4) {
+  border-color: #17a2b8;
+}
+.summary-card h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #6c757d;
+}
+.summary-card p {
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+.mt-4 {
+  margin-top: 2rem;
+}
+.text-success {
+  color: var(--success-color);
+}
+.text-danger {
+  color: var(--danger-color);
+}
+
+/* --- Additional Loan Modal Styles --- */
+.modal-content.modal-lg {
+  max-width: 800px;
+}
+.loan-details .detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+.form-row .form-group {
+  flex: 1;
+}
+@media (max-width: 576px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0; /* form-group margin-bottom will handle spacing */
+  }
+  /* FIX: Stack loan detail grid on small screens */
+  .loan-details .detail-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
+#paymentHistoryTable {
+  margin-top: 1rem;
+}
+
+/* --- Mobile Table Enhancements (moved from main.js) --- */
+.scroll-indicator {
+  background-color: #e9ecef;
+  color: #6c757d;
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  border: 1px solid var(--border-color);
+  border-bottom: none;
+  border-radius: 0.25rem 0.25rem 0 0;
+  transition: opacity 0.3s ease;
+}
+
+@media (min-width: 769px) {
+  .scroll-indicator {
+    display: none;
+  }
+}
+
+/* Touch device improvements */
+.touch-device .btn:hover {
+  background-color: var(--primary-color); /* Remove hover effects on touch */
+}
+
+.touch-device .sidebar-nav a:hover {
+  background-color: transparent; /* Remove hover effects on touch */
+}
+
+/* Alternative table layout for very small screens */
+@media (max-width: 480px) {
+  .table-stacked {
+    display: block;
+  }
+
+  .table-stacked thead {
+    display: none;
+  }
+
+  .table-stacked tbody,
+  .table-stacked tr,
+  .table-stacked td {
+    display: block;
+  }
+
+  .table-stacked tr {
+    border: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+  }
+
+  .table-stacked td {
+    text-align: left !important;
+    padding: 0.25rem 0;
+    border: none;
+  }
+
+  .table-stacked td:before {
+    content: attr(data-label) ": ";
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+
+  .table-stacked .actions-cell {
+    text-align: center;
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .table-stacked .actions-cell:before {
+    content: "";
+  }
+}
