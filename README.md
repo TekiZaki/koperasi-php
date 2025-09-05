@@ -209,11 +209,11 @@ flowchart TD
     %% Kas Umum
     C --> C1[Tambah Pemasukan]
     C --> C2[Tambah Pengeluaran]
-    C --> C3[Edit/Hapus Transaksi]
+    C --> C3[Edit / Hapus Transaksi]
     C --> B
 
     %% Simpanan
-    D --> D1[Tambah Simpanan Wajib/Sukarela]
+    D --> D1[Tambah Simpanan Wajib / Sukarela]
     D --> D2[Lihat Detail Simpanan]
     D --> B
 
@@ -224,8 +224,8 @@ flowchart TD
     E --> B
 
     %% Infaq
-    F --> F1[Tambah Infaq (Pemasukan/Pengeluaran)]
-    F --> F2[Edit/Hapus Infaq]
+    F --> F1[Tambah Infaq: Pemasukan / Pengeluaran]
+    F --> F2[Edit / Hapus Infaq]
     F --> B
 
     %% Manajemen User (Superadmin only)
