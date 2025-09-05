@@ -63,7 +63,7 @@ koperasi-php/
 ### 1. Clone Repo
 
 ```bash
-git clone https://github.com/username/koperasi-php.git
+git clone https://github.com/TekiZaki/koperasi-php.git
 cd koperasi-php
 ```
 
