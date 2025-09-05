@@ -191,3 +191,49 @@ MIT License – silakan digunakan & dimodifikasi sesuai kebutuhan.
 - Klik tombol **Logout** di pojok kanan atas untuk keluar
 
 ---
+
+## 🗂️ Flowchart Alur Penggunaan
+
+```mermaid
+flowchart TD
+    A[Login] -->|Valid credentials| B[Dashboard]
+    A -->|Invalid| A
+
+    B --> C[Kas Umum]
+    B --> D[Simpanan]
+    B --> E[Pinjaman]
+    B --> F[Infaq]
+    B --> G[Manajemen User]
+    B --> H[Logout]
+
+    %% Kas Umum
+    C --> C1[Tambah Pemasukan]
+    C --> C2[Tambah Pengeluaran]
+    C --> C3[Edit/Hapus Transaksi]
+    C --> B
+
+    %% Simpanan
+    D --> D1[Tambah Simpanan Wajib/Sukarela]
+    D --> D2[Lihat Detail Simpanan]
+    D --> B
+
+    %% Pinjaman
+    E --> E1[Tambah Pinjaman]
+    E --> E2[Lihat Detail & Riwayat Cicilan]
+    E --> E3[Tambah Pembayaran Cicilan]
+    E --> B
+
+    %% Infaq
+    F --> F1[Tambah Infaq (Pemasukan/Pengeluaran)]
+    F --> F2[Edit/Hapus Infaq]
+    F --> B
+
+    %% Manajemen User (Superadmin only)
+    G --> G1[Tambah User Baru]
+    G --> G2[Edit User]
+    G --> G3[Delete User]
+    G --> B
+
+    %% Logout
+    H --> A
+```
